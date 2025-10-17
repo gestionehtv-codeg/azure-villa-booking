@@ -1,14 +1,14 @@
-import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
+import { buttonVariants } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import { Waves, Home, MapPin } from "lucide-react";
+import { cn } from "@/lib/utils";
 import villaHero from "@/assets/villa-hero.jpg";
 import villaPool from "@/assets/villa-pool.jpg";
 import villaInterior from "@/assets/villa-interior-1.jpg";
 
 const Index = () => {
-  const navigate = useNavigate();
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -30,21 +30,24 @@ const Index = () => {
             Lusso, eleganza e tranquillità in una villa esclusiva con vista mare
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
-            <Button 
-              onClick={() => navigate("/booking")}
-              size="lg"
-              className="bg-gradient-ocean text-primary-foreground hover:opacity-90 transition-smooth shadow-ocean text-lg px-8"
+            <Link 
+              to="/booking"
+              className={cn(
+                buttonVariants({ size: "lg" }),
+                "bg-gradient-ocean text-primary-foreground hover:opacity-90 transition-smooth shadow-ocean text-lg px-8"
+              )}
             >
               Prenota il Tuo Soggiorno
-            </Button>
-            <Button 
-              onClick={() => navigate("/gallery")}
-              size="lg"
-              variant="outline"
-              className="bg-background/90 backdrop-blur-sm border-2 text-foreground hover:bg-background transition-smooth text-lg px-8"
+            </Link>
+            <Link 
+              to="/gallery"
+              className={cn(
+                buttonVariants({ size: "lg", variant: "outline" }),
+                "bg-background/90 backdrop-blur-sm border-2 text-foreground hover:bg-background transition-smooth text-lg px-8"
+              )}
             >
               Scopri la Villa
-            </Button>
+            </Link>
           </div>
         </div>
 
@@ -135,14 +138,15 @@ const Index = () => {
           </div>
 
           <div className="text-center">
-            <Button 
-              onClick={() => navigate("/gallery")}
-              size="lg"
-              variant="outline"
-              className="border-2 hover:bg-accent hover:text-accent-foreground transition-smooth"
+            <Link 
+              to="/gallery"
+              className={cn(
+                buttonVariants({ size: "lg", variant: "outline" }),
+                "border-2 hover:bg-accent hover:text-accent-foreground transition-smooth"
+              )}
             >
               Vedi Tutte le Foto
-            </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -156,13 +160,15 @@ const Index = () => {
           <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
             Prenota ora e vivi un'esperienza indimenticabile nella nostra villa esclusiva
           </p>
-          <Button 
-            onClick={() => navigate("/booking")}
-            size="lg"
-            className="bg-background text-primary hover:bg-background/90 transition-smooth text-lg px-8"
+          <Link 
+            to="/booking"
+            className={cn(
+              buttonVariants({ size: "lg" }),
+              "bg-background text-primary hover:bg-background/90 transition-smooth text-lg px-8"
+            )}
           >
             Verifica Disponibilità
-          </Button>
+          </Link>
         </div>
       </section>
 

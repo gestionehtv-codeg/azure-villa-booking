@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
@@ -26,12 +26,15 @@ const Navigation = () => {
             <Link to="/booking" className="text-foreground hover:text-accent transition-smooth">
               Prenota
             </Link>
-            <Button 
-              onClick={() => navigate("/booking")}
-              className="bg-gradient-ocean text-primary-foreground hover:opacity-90 transition-smooth shadow-ocean"
+            <Link 
+              to="/booking"
+              className={cn(
+                buttonVariants(),
+                "bg-gradient-ocean text-primary-foreground hover:opacity-90 transition-smooth shadow-ocean"
+              )}
             >
               Prenota Ora
-            </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -67,15 +70,16 @@ const Navigation = () => {
             >
               Prenota
             </Link>
-            <Button 
-              onClick={() => {
-                setIsOpen(false);
-                navigate("/booking");
-              }}
-              className="w-full bg-gradient-ocean text-primary-foreground"
+            <Link 
+              to="/booking"
+              onClick={() => setIsOpen(false)}
+              className={cn(
+                buttonVariants(),
+                "w-full bg-gradient-ocean text-primary-foreground"
+              )}
             >
               Prenota Ora
-            </Button>
+            </Link>
           </div>
         )}
       </div>
