@@ -3,6 +3,7 @@ import { buttonVariants } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import { Waves, Home, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useSiteContent } from "@/hooks/useSiteContent";
 import villaHero from "@/assets/villa-hero.jpg";
 import villaPool from "@/assets/villa-pool.jpg";
 import villaInterior from "@/assets/villa-interior-1.jpg";
@@ -12,6 +13,11 @@ const Index = () => {
     window.location.href = path;
   };
 
+  const { content: heroContent } = useSiteContent("hero");
+  const { content: featuresContent } = useSiteContent("features");
+  const { content: galleryContent } = useSiteContent("gallery_preview");
+  const { content: ctaContent } = useSiteContent("cta");
+
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -20,17 +26,19 @@ const Index = () => {
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${villaHero})` }}
+          style={{ 
+            backgroundImage: `url(${heroContent?.heroImage || villaHero})` 
+          }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-primary/30 via-primary/20 to-background"></div>
         </div>
         
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
           <h1 className="font-serif text-5xl md:text-7xl font-bold text-primary-foreground mb-6 animate-fade-in">
-            Il Tuo Paradiso Mediterraneo
+            {heroContent?.title || "Il Tuo Paradiso Mediterraneo"}
           </h1>
           <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8 animate-fade-in">
-            Lusso, eleganza e tranquillità in una villa esclusiva con vista mare
+            {heroContent?.subtitle || "Lusso, eleganza e tranquillità in una villa esclusiva con vista mare"}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
             <button 
@@ -63,10 +71,10 @@ const Index = () => {
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
           <h2 className="font-serif text-4xl md:text-5xl font-bold text-center mb-4">
-            Perché Villa Marina
+            {featuresContent?.title || "Perché Villa Marina"}
           </h2>
           <p className="text-center text-muted-foreground text-lg mb-16 max-w-2xl mx-auto">
-            Ogni dettaglio è pensato per offrirti un'esperienza indimenticabile
+            {featuresContent?.subtitle || "Ogni dettaglio è pensato per offrirti un'esperienza indimenticabile"}
           </p>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -75,9 +83,11 @@ const Index = () => {
                 <div className="w-16 h-16 mx-auto mb-6 bg-gradient-ocean rounded-full flex items-center justify-center">
                   <Waves className="text-primary-foreground" size={32} />
                 </div>
-                <h3 className="font-serif text-2xl font-bold mb-4">Vista Mare Mozzafiato</h3>
+                <h3 className="font-serif text-2xl font-bold mb-4">
+                  {featuresContent?.feature1?.title || "Vista Mare Mozzafiato"}
+                </h3>
                 <p className="text-muted-foreground">
-                  Piscina infinity con vista panoramica sul Mar Mediterraneo, per momenti di puro relax
+                  {featuresContent?.feature1?.description || "Piscina infinity con vista panoramica sul Mar Mediterraneo, per momenti di puro relax"}
                 </p>
               </CardContent>
             </Card>
@@ -87,9 +97,11 @@ const Index = () => {
                 <div className="w-16 h-16 mx-auto mb-6 bg-gradient-ocean rounded-full flex items-center justify-center">
                   <Home className="text-primary-foreground" size={32} />
                 </div>
-                <h3 className="font-serif text-2xl font-bold mb-4">Design Elegante</h3>
+                <h3 className="font-serif text-2xl font-bold mb-4">
+                  {featuresContent?.feature2?.title || "Design Elegante"}
+                </h3>
                 <p className="text-muted-foreground">
-                  Architettura moderna e minimalista con arredi di lusso e comfort esclusivo
+                  {featuresContent?.feature2?.description || "Architettura moderna e minimalista con arredi di lusso e comfort esclusivo"}
                 </p>
               </CardContent>
             </Card>
@@ -99,9 +111,11 @@ const Index = () => {
                 <div className="w-16 h-16 mx-auto mb-6 bg-gradient-ocean rounded-full flex items-center justify-center">
                   <MapPin className="text-primary-foreground" size={32} />
                 </div>
-                <h3 className="font-serif text-2xl font-bold mb-4">Posizione Esclusiva</h3>
+                <h3 className="font-serif text-2xl font-bold mb-4">
+                  {featuresContent?.feature3?.title || "Posizione Esclusiva"}
+                </h3>
                 <p className="text-muted-foreground">
-                  Privacy assoluta in una location privilegiata, a pochi passi dalle spiagge più belle
+                  {featuresContent?.feature3?.description || "Privacy assoluta in una location privilegiata, a pochi passi dalle spiagge più belle"}
                 </p>
               </CardContent>
             </Card>
@@ -113,29 +127,33 @@ const Index = () => {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <h2 className="font-serif text-4xl md:text-5xl font-bold text-center mb-16">
-            Scopri gli Spazi
+            {galleryContent?.title || "Scopri gli Spazi"}
           </h2>
           
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             <div className="relative h-96 rounded-2xl overflow-hidden shadow-luxury group">
               <img 
-                src={villaPool} 
+                src={galleryContent?.image1 || villaPool}
                 alt="Piscina infinity con vista mare"
                 className="w-full h-full object-cover transition-smooth group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent flex items-end p-8">
-                <h3 className="font-serif text-3xl font-bold text-primary-foreground">Piscina Infinity</h3>
+                <h3 className="font-serif text-3xl font-bold text-primary-foreground">
+                  {galleryContent?.image1Title || "Piscina Infinity"}
+                </h3>
               </div>
             </div>
 
             <div className="relative h-96 rounded-2xl overflow-hidden shadow-luxury group">
               <img 
-                src={villaInterior} 
+                src={galleryContent?.image2 || villaInterior}
                 alt="Camera da letto con vista mare"
                 className="w-full h-full object-cover transition-smooth group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent flex items-end p-8">
-                <h3 className="font-serif text-3xl font-bold text-primary-foreground">Suite Vista Mare</h3>
+                <h3 className="font-serif text-3xl font-bold text-primary-foreground">
+                  {galleryContent?.image2Title || "Suite Vista Mare"}
+                </h3>
               </div>
             </div>
           </div>
@@ -158,10 +176,10 @@ const Index = () => {
       <section className="py-20 bg-gradient-luxury text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6">
-            Pronto per la Tua Vacanza da Sogno?
+            {ctaContent?.title || "Pronto per la Tua Vacanza da Sogno?"}
           </h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
-            Prenota ora e vivi un'esperienza indimenticabile nella nostra villa esclusiva
+            {ctaContent?.subtitle || "Prenota ora e vivi un'esperienza indimenticabile nella nostra villa esclusiva"}
           </p>
           <button 
             onClick={() => navigate("/booking")}

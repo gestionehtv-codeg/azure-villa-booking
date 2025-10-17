@@ -7,9 +7,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calendar } from "@/components/ui/calendar";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { LogOut, Calendar as CalendarIcon, Users, CheckCircle, XCircle } from "lucide-react";
+import { LogOut, Calendar as CalendarIcon, Users, CheckCircle, XCircle, FileText } from "lucide-react";
 import { format } from "date-fns";
 import { it } from "date-fns/locale";
+import { ContentEditor } from "@/components/admin/ContentEditor";
 
 interface Booking {
   id: string;
@@ -223,6 +224,7 @@ const AdminDashboard = () => {
           <TabsList>
             <TabsTrigger value="bookings">Prenotazioni</TabsTrigger>
             <TabsTrigger value="calendar">Calendario Disponibilità</TabsTrigger>
+            <TabsTrigger value="content">Gestione Contenuti</TabsTrigger>
           </TabsList>
 
           <TabsContent value="bookings" className="space-y-4">
@@ -333,6 +335,46 @@ const AdminDashboard = () => {
                 />
               </CardContent>
             </Card>
+          </TabsContent>
+
+          <TabsContent value="content" className="space-y-6">
+            <div className="grid gap-6">
+              <ContentEditor 
+                section="hero"
+                title="Sezione Hero"
+                description="Modifica il titolo, sottotitolo e immagine principale della homepage"
+              />
+
+              <ContentEditor 
+                section="features"
+                title="Sezione Caratteristiche"
+                description="Modifica i titoli e descrizioni delle caratteristiche"
+              />
+
+              <ContentEditor 
+                section="gallery_preview"
+                title="Anteprima Galleria"
+                description="Modifica le immagini in evidenza sulla homepage"
+              />
+
+              <ContentEditor 
+                section="cta"
+                title="Call to Action"
+                description="Modifica il messaggio di invito all'azione"
+              />
+
+              <ContentEditor 
+                section="gallery"
+                title="Pagina Galleria"
+                description="Gestisci tutte le immagini e i servizi della galleria"
+              />
+
+              <ContentEditor 
+                section="booking"
+                title="Pagina Prenotazione"
+                description="Modifica i testi della pagina di prenotazione"
+              />
+            </div>
           </TabsContent>
         </Tabs>
       </div>

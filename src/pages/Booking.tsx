@@ -14,6 +14,7 @@ import { CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { useSiteContent } from "@/hooks/useSiteContent";
 import { z } from "zod";
 
 const bookingSchema = z.object({
@@ -26,6 +27,7 @@ const bookingSchema = z.object({
 
 const Booking = () => {
   const navigate = useNavigate();
+  const { content } = useSiteContent("booking");
   const [checkIn, setCheckIn] = useState<Date>();
   const [checkOut, setCheckOut] = useState<Date>();
   const [formData, setFormData] = useState({
@@ -99,10 +101,10 @@ const Booking = () => {
       <div className="pt-32 pb-20">
         <div className="container mx-auto px-4 max-w-4xl">
           <h1 className="font-serif text-5xl md:text-6xl font-bold text-center mb-6">
-            Prenota il Tuo Soggiorno
+            {content?.title || "Prenota il Tuo Soggiorno"}
           </h1>
           <p className="text-center text-muted-foreground text-lg mb-12">
-            Compila il modulo per richiedere la disponibilità. Ti risponderemo entro 24 ore.
+            {content?.subtitle || "Compila il modulo per richiedere la disponibilità. Ti risponderemo entro 24 ore."}
           </p>
 
           <Card className="shadow-luxury border-none">

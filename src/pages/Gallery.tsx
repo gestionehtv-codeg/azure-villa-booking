@@ -1,16 +1,32 @@
 import Navigation from "@/components/Navigation";
 import { Card } from "@/components/ui/card";
+import { useSiteContent } from "@/hooks/useSiteContent";
 import villaHero from "@/assets/villa-hero.jpg";
 import villaPool from "@/assets/villa-pool.jpg";
 import villaInterior from "@/assets/villa-interior-1.jpg";
 import villaTerrace from "@/assets/villa-terrace.jpg";
 
 const Gallery = () => {
-  const images = [
-    { src: villaHero, title: "Vista Panoramica", description: "La villa con piscina infinity e vista mare mozzafiato" },
-    { src: villaPool, title: "Piscina Infinity", description: "Acqua cristallina che si fonde con l'orizzonte del mare" },
-    { src: villaInterior, title: "Suite Master", description: "Camera da letto con vista mare e design minimalista" },
-    { src: villaTerrace, title: "Terrazza al Tramonto", description: "Spazio outdoor perfetto per aperitivi e cene romantiche" },
+  const { content } = useSiteContent("gallery");
+
+  const defaultImages = [
+    { url: villaHero, title: "Vista Panoramica", description: "La villa con piscina infinity e vista mare mozzafiato" },
+    { url: villaPool, title: "Piscina Infinity", description: "Acqua cristallina che si fonde con l'orizzonte del mare" },
+    { url: villaInterior, title: "Suite Master", description: "Camera da letto con vista mare e design minimalista" },
+    { url: villaTerrace, title: "Terrazza al Tramonto", description: "Spazio outdoor perfetto per aperitivi e cene romantiche" },
+  ];
+
+  const images = content?.images || defaultImages;
+  const amenities = content?.amenities || [
+    "Piscina infinity a sfioro",
+    "Terrazza panoramica",
+    "Wi-Fi ad alta velocità",
+    "Aria condizionata",
+    "Cucina completamente attrezzata",
+    "Barbecue e zona pranzo esterna",
+    "Parcheggio privato",
+    "Sistema audio premium",
+    "Biancheria e asciugamani di lusso",
   ];
 
   return (
@@ -20,21 +36,21 @@ const Gallery = () => {
       <div className="pt-32 pb-20">
         <div className="container mx-auto px-4">
           <h1 className="font-serif text-5xl md:text-6xl font-bold text-center mb-6">
-            Galleria Fotografica
+            {content?.title || "Galleria Fotografica"}
           </h1>
           <p className="text-center text-muted-foreground text-lg mb-16 max-w-2xl mx-auto">
-            Scopri ogni angolo della nostra villa di lusso attraverso immagini che catturano l'essenza del Mediterraneo
+            {content?.subtitle || "Scopri ogni angolo della nostra villa di lusso attraverso immagini che catturano l'essenza del Mediterraneo"}
           </p>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {images.map((image, index) => (
+            {images.map((image: any, index: number) => (
               <Card 
                 key={index}
                 className="overflow-hidden border-none shadow-luxury hover:shadow-ocean transition-smooth group"
               >
                 <div className="relative h-96 overflow-hidden">
                   <img 
-                    src={image.src} 
+                    src={image.url} 
                     alt={image.title}
                     className="w-full h-full object-cover transition-smooth group-hover:scale-110"
                   />
@@ -71,17 +87,7 @@ const Gallery = () => {
           <div className="mt-16">
             <h2 className="font-serif text-3xl font-bold text-center mb-12">Servizi Inclusi</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                "Piscina infinity a sfioro",
-                "Terrazza panoramica",
-                "Wi-Fi ad alta velocità",
-                "Aria condizionata",
-                "Cucina completamente attrezzata",
-                "Barbecue e zona pranzo esterna",
-                "Parcheggio privato",
-                "Sistema audio premium",
-                "Biancheria e asciugamani di lusso",
-              ].map((amenity, index) => (
+              {amenities.map((amenity: string, index: number) => (
                 <div 
                   key={index}
                   className="flex items-center gap-3 p-4 bg-card rounded-lg shadow-soft"
