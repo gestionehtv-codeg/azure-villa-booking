@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
@@ -26,10 +27,10 @@ const Navigation = () => {
               Prenota
             </Link>
             <Button 
-              asChild
+              onClick={() => navigate("/booking")}
               className="bg-gradient-ocean text-primary-foreground hover:opacity-90 transition-smooth shadow-ocean"
             >
-              <Link to="/booking">Prenota Ora</Link>
+              Prenota Ora
             </Button>
           </div>
 
@@ -67,12 +68,13 @@ const Navigation = () => {
               Prenota
             </Link>
             <Button 
-              asChild
+              onClick={() => {
+                setIsOpen(false);
+                navigate("/booking");
+              }}
               className="w-full bg-gradient-ocean text-primary-foreground"
             >
-              <Link to="/booking" onClick={() => setIsOpen(false)}>
-                Prenota Ora
-              </Link>
+              Prenota Ora
             </Button>
           </div>
         )}

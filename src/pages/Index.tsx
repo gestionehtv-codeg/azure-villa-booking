@@ -1,13 +1,14 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Navigation from "@/components/Navigation";
-import { Waves, Home, MapPin, Wifi } from "lucide-react";
+import { Waves, Home, MapPin } from "lucide-react";
 import villaHero from "@/assets/villa-hero.jpg";
 import villaPool from "@/assets/villa-pool.jpg";
 import villaInterior from "@/assets/villa-interior-1.jpg";
 
 const Index = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -30,19 +31,19 @@ const Index = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
             <Button 
-              asChild
+              onClick={() => navigate("/booking")}
               size="lg"
               className="bg-gradient-ocean text-primary-foreground hover:opacity-90 transition-smooth shadow-ocean text-lg px-8"
             >
-              <Link to="/booking">Prenota il Tuo Soggiorno</Link>
+              Prenota il Tuo Soggiorno
             </Button>
             <Button 
-              asChild
+              onClick={() => navigate("/gallery")}
               size="lg"
               variant="outline"
               className="bg-background/90 backdrop-blur-sm border-2 text-foreground hover:bg-background transition-smooth text-lg px-8"
             >
-              <Link to="/gallery">Scopri la Villa</Link>
+              Scopri la Villa
             </Button>
           </div>
         </div>
@@ -135,12 +136,12 @@ const Index = () => {
 
           <div className="text-center">
             <Button 
-              asChild
+              onClick={() => navigate("/gallery")}
               size="lg"
               variant="outline"
               className="border-2 hover:bg-accent hover:text-accent-foreground transition-smooth"
             >
-              <Link to="/gallery">Vedi Tutte le Foto</Link>
+              Vedi Tutte le Foto
             </Button>
           </div>
         </div>
@@ -156,11 +157,11 @@ const Index = () => {
             Prenota ora e vivi un'esperienza indimenticabile nella nostra villa esclusiva
           </p>
           <Button 
-            asChild
+            onClick={() => navigate("/booking")}
             size="lg"
             className="bg-background text-primary hover:bg-background/90 transition-smooth text-lg px-8"
           >
-            <Link to="/booking">Verifica Disponibilità</Link>
+            Verifica Disponibilità
           </Button>
         </div>
       </section>
