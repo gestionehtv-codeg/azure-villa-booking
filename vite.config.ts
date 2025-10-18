@@ -5,7 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: './', // necessario per GitHub Pages
+  base: '/azure-villa-booking/',
   server: {
     host: '::',
     port: 8080,
