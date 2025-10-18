@@ -4,14 +4,13 @@ import Navigation from "@/components/Navigation";
 import { Waves, Home, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSiteContent } from "@/hooks/useSiteContent";
+import { useNavigate } from "react-router-dom";
 import villaHero from "@/assets/villa-hero.jpg";
 import villaPool from "@/assets/villa-pool.jpg";
 import villaInterior from "@/assets/villa-interior-1.jpg";
 
 const Index = () => {
-  const navigate = (path: string) => {
-    window.location.href = path;
-  };
+  const navigate = useNavigate();
 
   const { content: heroContent } = useSiteContent("hero");
   const { content: featuresContent } = useSiteContent("features");
